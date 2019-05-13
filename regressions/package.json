@@ -3,11 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "runit": "babel-node --presets es2015 index.js"
+  },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@tensorflow/tfjs-node": "^0.1.17",
+    "@tensorflow/tfjs-node": "*",
     "lodash": "^4.17.11",
     "memoize": "^0.1.1",
     "mnist-data": "^1.2.6",

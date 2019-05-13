@@ -1,0 +1,8 @@
+Set-ExecutionPolicy Unrestricted -Scope CurrentUser -Force
+npm install -g windows-build-tools
+npm install
+https://stackoverflow.com/questions/32964144/gyp-err-stack-error-c-program-files-x86-msbuild-12-0-bin-msbuild-exe-fail/33119669#33119669
+this is the fix for npm having issues with installing tensorflow.js
+
+also don't forget to check the python 2.7 path 
+npm config set python /path/to/executable/python2.7

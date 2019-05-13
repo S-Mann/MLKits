@@ -5,18 +5,20 @@ function onScoreUpdate(dropPosition, bounciness, size, bucketLabel) {
 }
 
 function runAnalysis() {
-  let testSetSize = 100
-  const [testSet, trainingSet] = splitDataset(outputs, testSetSize)
+  const testSetSize = 100;
+  const k = 10;
 
-  _.range(1, 20).forEach(k => {
+  _.range(0, 3).forEach(feature => {
+    const data = _.map(outputs, row => [row[feature], _.last(row)]);
+    const [testSet, trainingSet] = splitDataset(scale(data, 1), testSetSize);
     const accuracy = _.chain(testSet)
       .filter(testPoint => {
-        return knn(trainingSet, _.initial(testPoint), k) === testPoint[3]
+        return knn(trainingSet, _.initial(testPoint), k) === _.last(testPoint)
       })
       .size()
       .divide(testSetSize)
       .value();
-    console.log('Accuracy', accuracy, '| k', k)
+    console.log('Accuracy', accuracy, '| feature', feature)
   });
 }
 
@@ -58,6 +60,8 @@ function scale(data, columnCount) {
       clonedData[j][i] = (clonedData[j][i] - min) / (max - min);
     }
   }
+
+  return clonedData;
 }
 
 function splitDataset(data, count) {
